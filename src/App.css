@@ -61,37 +61,6 @@
   );
 }
 
-.sphere {
-  height: 80%;
-  border-radius: 50%;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  width: 80%;
-  margin: 10%;
-}
-
-.sphere-white {
-  background-color: whitesmoke;
-  border: 2px solid #d4af37;
-}
-
-.sphere-black {
-  background-color: black;
-  border: 2px solid #d4af37;
-}
-
-.tetrahedron {
-  height: 80%;
-  width: 80%;
-  margin: 10%;
-}
-
-.pyramid {
-  height: 80%;
-  width: 80%;
-  margin: 10%;
-}
-
 .cube {
   height: 80%;
   width: 80%;

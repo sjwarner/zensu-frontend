@@ -38,7 +38,7 @@ const PlayerList = ({ socket, players, setPlayers }) => {
                     alt="Drag and drop player order"
                   />
                   <p className="ml-1">
-                    {index === 0 ? "White" : "Black"}: {player.name}
+                    {index === 0 ? "Red" : "Blue"}: {player.name}
                   </p>
                 </div>
                 <p>{ready}</p>

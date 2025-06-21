@@ -1,6 +1,6 @@
 const Players = {
-  WHITE: "white",
-  BLACK: "black",
+  RED: "red",
+  BLUE: "blue",
 };
 
 export default Players;

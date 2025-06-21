@@ -14,7 +14,7 @@ const LocalMultiplayerPage = () => {
     JSON.parse(JSON.stringify(InitialGameStateWhite))
   );
   const [winner, setWinner] = useState(null);
-  const [turn, setTurn] = useState(Players.WHITE);
+  const [turn, setTurn] = useState(Players.RED);
 
   return (
     <div className="app p-8 px-12 flex flex-col lg:flex-row justify-center items-center w-full">

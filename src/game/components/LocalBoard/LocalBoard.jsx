@@ -7,7 +7,6 @@ import BoardSidePane from "../SidePane/BoardSidePane/BoardSidePane";
 
 import moveSfx from "../../../sounds/move.wav";
 
-import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
 import {calculateValidMoves, isArrayInArray} from "../../logic/utils";
 
@@ -38,10 +37,10 @@ const LocalBoard = ({
   const selectCandidatePiece = (rank, file) => {
     let candidatePiece = gameState[rank][file];
     if (
-      (turn === Players.WHITE &&
+      (turn === Players.RED &&
         candidatePiece &&
         candidatePiece === candidatePiece.toUpperCase()) ||
-      (turn === Players.BLACK &&
+      (turn === Players.BLUE &&
         candidatePiece &&
         candidatePiece === candidatePiece.toLowerCase())
     ) {
@@ -96,7 +95,7 @@ const LocalBoard = ({
       setOriginRank(null);
       setOriginFile(null);
       setValidMoves([]);
-      setTurn(turn === Players.WHITE ? Players.BLACK : Players.WHITE);
+      setTurn(turn === Players.RED ? Players.BLUE : Players.RED);
     }
   };
 

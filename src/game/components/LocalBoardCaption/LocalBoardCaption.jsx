@@ -28,11 +28,11 @@ const LocalBoardCaption = ({
     <div className="mt-4 mb-4">
       {winner && (
         <Caption>
-          🎉 {winner === Players.WHITE ? "Player One" : "Player Two"} won! 🎉
+          🎉 {winner === Players.RED ? "Red" : "Blue"} won! 🎉
         </Caption>
       )}
       {inProgress && (
-        <Caption>{turn === Players.WHITE ? "White" : "Black"}'s turn.</Caption>
+        <Caption>{turn === Players.RED ? "Red" : "Blue"}'s turn.</Caption>
       )}
       {!inProgress && (
         <div className="flex flex-row mb-4">

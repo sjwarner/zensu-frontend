@@ -1,5 +1,6 @@
 import Pieces from "./Pieces";
-import Cube from "../components/Pieces/Cube";
+import FrontRowPiece from "../components/Pieces/FrontRowPiece.jsx";
+import BackRowPiece from "../components/Pieces/BackRowPiece.jsx";
 import Empty from "../components/Pieces/Empty";
 
 const BOARD_ROWS = 9;     // height (Y)
@@ -60,10 +61,14 @@ export const isArrayInArray = (arr, item) => {
 
 export const movementSpeed = (piece) => {
   switch (piece) {
-    case Pieces.WHITE:
+    case Pieces.WHITE_BACK_ROW:
       return { up: 2, down: 4, left: 1, right: 3 };
-    case Pieces.BLACK:
+    case Pieces.BLACK_BACK_ROW:
       return { up: 4, down: 2, left: 3, right: 1 };
+    case Pieces.WHITE_FRONT_ROW:
+      return { up: 1, down: 3, left: 4, right: 2 };
+    case Pieces.BLACK_FRONT_ROW:
+      return { up: 3, down: 1, left: 2, right: 4 };
     default:
       return { up: 0, down: 0, left: 0, right: 0 };
   }
@@ -77,12 +82,16 @@ export const isPlayerPiece = (str1, str2) => {
   return isUpper(str1) === isUpper(str2);
 };
 
-export const renderPiece = (piece) => {
+export const renderPiece = (piece, forBoard = true) => {
   switch (piece) {
-    case Pieces.WHITE:
-      return <Cube colour="white" />;
-    case Pieces.BLACK:
-      return <Cube colour="black" />;
+    case Pieces.WHITE_BACK_ROW:
+      return <BackRowPiece colour="red" forBoard={forBoard} />;
+    case Pieces.BLACK_BACK_ROW:
+      return <BackRowPiece colour="blue" forBoard={forBoard} />;
+    case Pieces.WHITE_FRONT_ROW:
+      return <FrontRowPiece colour="red" forBoard={forBoard} />;
+    case Pieces.BLACK_FRONT_ROW:
+      return <FrontRowPiece colour="blue" forBoard={forBoard} />;
     default:
       return <Empty />;
   }
