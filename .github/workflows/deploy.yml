@@ -21,6 +21,9 @@ jobs:
           npm install
           npm run build
 
+      - name: Copy CNAME
+        run: cp CNAME dist/CNAME
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
