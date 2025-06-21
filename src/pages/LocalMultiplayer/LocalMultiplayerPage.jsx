@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../App.css";
 
-import {InitialGameStateWhite} from "../../game/logic/InitialGameState.js";
+import {InitialGameStateRed} from "../../game/logic/InitialGameState.js";
 import Players from "../../game/logic/Players.js";
 
 import LocalBoard from "../../game/components/LocalBoard/LocalBoard";
@@ -11,7 +11,7 @@ const LocalMultiplayerPage = () => {
 
   // Stringify hack to deep clone InitialGameState - avoids mutation.
   const [gameState, setGameState] = useState(
-    JSON.parse(JSON.stringify(InitialGameStateWhite))
+    JSON.parse(JSON.stringify(InitialGameStateRed))
   );
   const [winner, setWinner] = useState(null);
   const [turn, setTurn] = useState(Players.RED);

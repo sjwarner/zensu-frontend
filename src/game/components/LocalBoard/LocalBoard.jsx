@@ -8,6 +8,7 @@ import BoardSidePane from "../SidePane/BoardSidePane/BoardSidePane";
 import moveSfx from "../../../sounds/move.wav";
 
 import Players from "../../logic/Players";
+import Pieces from "../../logic/Pieces.js";
 import {calculateValidMoves, isArrayInArray} from "../../logic/utils";
 
 const LocalBoard = ({
@@ -95,9 +96,28 @@ const LocalBoard = ({
       setOriginRank(null);
       setOriginFile(null);
       setValidMoves([]);
+
+      checkWinCondition(newGameState);
+
       setTurn(turn === Players.RED ? Players.BLUE : Players.RED);
     }
   };
+
+  const checkWinCondition = (board) => {
+    const redPieces = new Set([Pieces.RED_FRONT_ROW, Pieces.RED_BACK_ROW]);
+    const bluePieces = new Set([Pieces.BLUE_FRONT_ROW, Pieces.BLUE_BACK_ROW]);
+
+    const firstRow = board[0];
+    const redWins = firstRow.some(cell => redPieces.has(cell));
+
+    const lastRow = board[board.length - 1];
+    const blueWins = lastRow.some(cell => bluePieces.has(cell));
+
+    if (redWins || blueWins) {
+      setWinner(turn);
+      setInProgress(false);
+    }
+  }
 
 
   return (

@@ -61,13 +61,13 @@ export const isArrayInArray = (arr, item) => {
 
 export const movementSpeed = (piece) => {
   switch (piece) {
-    case Pieces.WHITE_BACK_ROW:
+    case Pieces.RED_BACK_ROW:
       return { up: 2, down: 4, left: 1, right: 3 };
-    case Pieces.BLACK_BACK_ROW:
+    case Pieces.BLUE_BACK_ROW:
       return { up: 4, down: 2, left: 3, right: 1 };
-    case Pieces.WHITE_FRONT_ROW:
+    case Pieces.RED_FRONT_ROW:
       return { up: 1, down: 3, left: 4, right: 2 };
-    case Pieces.BLACK_FRONT_ROW:
+    case Pieces.BLUE_FRONT_ROW:
       return { up: 3, down: 1, left: 2, right: 4 };
     default:
       return { up: 0, down: 0, left: 0, right: 0 };
@@ -84,13 +84,13 @@ export const isPlayerPiece = (str1, str2) => {
 
 export const renderPiece = (piece, forBoard = true) => {
   switch (piece) {
-    case Pieces.WHITE_BACK_ROW:
+    case Pieces.RED_BACK_ROW:
       return <BackRowPiece colour="red" forBoard={forBoard} />;
-    case Pieces.BLACK_BACK_ROW:
+    case Pieces.BLUE_BACK_ROW:
       return <BackRowPiece colour="blue" forBoard={forBoard} />;
-    case Pieces.WHITE_FRONT_ROW:
+    case Pieces.RED_FRONT_ROW:
       return <FrontRowPiece colour="red" forBoard={forBoard} />;
-    case Pieces.BLACK_FRONT_ROW:
+    case Pieces.BLUE_FRONT_ROW:
       return <FrontRowPiece colour="blue" forBoard={forBoard} />;
     default:
       return <Empty />;

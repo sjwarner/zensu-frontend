@@ -19,10 +19,10 @@ const BoardSidePane = ({
   return (
     <div className="flex-flex-col">
       <div className="w-64 flex flex-row lg:flex-col justify-center items-center">
-        <MaterialCounter gameState={gameState} piece={Pieces.WHITE_FRONT_ROW} />
-        <MaterialCounter gameState={gameState} piece={Pieces.WHITE_BACK_ROW} />
-        <MaterialCounter gameState={gameState} piece={Pieces.BLACK_FRONT_ROW} />
-        <MaterialCounter gameState={gameState} piece={Pieces.BLACK_BACK_ROW} />
+        <MaterialCounter gameState={gameState} piece={Pieces.RED_FRONT_ROW} />
+        <MaterialCounter gameState={gameState} piece={Pieces.RED_BACK_ROW} />
+        <MaterialCounter gameState={gameState} piece={Pieces.BLUE_FRONT_ROW} />
+        <MaterialCounter gameState={gameState} piece={Pieces.BLUE_BACK_ROW} />
       </div>
       {socket && (
         <DrawOrResignWidget

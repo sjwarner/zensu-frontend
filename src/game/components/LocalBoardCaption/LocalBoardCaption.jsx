@@ -3,7 +3,7 @@ import Caption from "../../../general/components/Caption/Caption";
 import Button from "../../../general/components/Button/Button";
 
 import Players from "../../logic/Players";
-import { InitialGameStateWhite } from "../../logic/InitialGameState";
+import { InitialGameStateRed } from "../../logic/InitialGameState";
 import GameModes from "../../logic/GameModes";
 
 const LocalBoardCaption = ({
@@ -21,7 +21,7 @@ const LocalBoardCaption = ({
     setPreviousGameMode(gameMode);
     setWinner(null);
 
-    setGameState(JSON.parse(JSON.stringify(InitialGameStateWhite)));
+    setGameState(JSON.parse(JSON.stringify(InitialGameStateRed)));
   };
 
   return (
