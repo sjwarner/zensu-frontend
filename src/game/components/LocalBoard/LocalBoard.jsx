@@ -9,7 +9,7 @@ import BoardSidePane from "../SidePane/BoardSidePane/BoardSidePane";
 
 import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
-import { calculateValidMoves, isArrayInArray } from "../../logic/utils";
+import {calculateValidMoves, isArrayInArray} from "../../logic/utils";
 
 const LocalBoard = ({
   inProgress,
@@ -62,23 +62,44 @@ const LocalBoard = ({
     setValidMoves([]);
   };
 
+  const clearPiecesBetween = (originRank, originFile, destinationRank, destinationFile, gameState) => {
+    const stepRow = Math.sign(destinationRank - originRank);
+    const stepCol = Math.sign(destinationFile - originFile);
+    const distance = Math.max(
+        Math.abs(destinationRank - originRank),
+        Math.abs(destinationFile - originFile)
+    );
+
+    const positionsToClear = new Set();
+    for (let i = 1; i < distance; i++) {
+      positionsToClear.add(`${originRank + stepRow * i},${originFile + stepCol * i}`);
+    }
+
+    return gameState.map((row, r) =>
+        row.map((cell, c) => (positionsToClear.has(`${r},${c}`) ? "" : cell))
+    );
+  };
+
   const movePiece = (destinationRank, destinationFile) => {
     if (isArrayInArray(validMoves, [destinationRank, destinationFile])) {
-      let tmp = gameState;
-      // if (gameState[destinationRank][destinationFile].toUpperCase() === "S") {
-      //   setWinner(turn);
-      //   setInProgress(false);
-      // }
-      tmp[destinationRank][destinationFile] = gameState[originRank][originFile];
-      tmp[originRank][originFile] = "";
-      setGameState(tmp);
+      let newGameState = clearPiecesBetween(originRank, originFile, destinationRank, destinationFile, gameState);
+
+      newGameState = newGameState.map((row, r) =>
+          row.map((cell, c) => {
+            if (r === destinationRank && c === destinationFile) return gameState[originRank][originFile];
+            if (r === originRank && c === originFile) return "";
+            return cell;
+          })
+      );
+
+      setGameState(newGameState);
       setOriginRank(null);
       setOriginFile(null);
       setValidMoves([]);
-
       setTurn(turn === Players.WHITE ? Players.BLACK : Players.WHITE);
     }
   };
+
 
   return (
     <>

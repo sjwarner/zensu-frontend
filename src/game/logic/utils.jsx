@@ -73,7 +73,7 @@ const isUpper = (str) => {
   return !/[a-z]/.test(str) && /[A-Z]/.test(str);
 };
 
-const isPlayerPiece = (str1, str2) => {
+export const isPlayerPiece = (str1, str2) => {
   return isUpper(str1) === isUpper(str2);
 };
 
