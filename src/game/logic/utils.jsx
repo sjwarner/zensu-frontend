@@ -2,116 +2,42 @@ import Pieces from "./Pieces";
 import Cube from "../components/Pieces/Cube";
 import Empty from "../components/Pieces/Empty";
 
-export const calculateValidMoves = (
-  rank,
-  file,
-  gameState,
-  setValidMoves,
-  firstTurn
-) => {
+const BOARD_WIDTH = 6;
+const BOARD_HEIGHT = 9;
+
+export const calculateValidMoves = (rank, file, gameState, setValidMoves) => {
   const piece = gameState[rank][file];
   const movement = movementSpeed(piece);
   let validMoves = [];
 
-  addValidMoves(
-    rank,
-    file - 1,
-    movement - 1,
-    validMoves,
-    piece,
-    gameState,
-    firstTurn
-  ); // up
-  addValidMoves(
-    rank + 1,
-    file,
-    movement - 1,
-    validMoves,
-    piece,
-    gameState,
-    firstTurn
-  ); // right
-  addValidMoves(
-    rank,
-    file + 1,
-    movement - 1,
-    validMoves,
-    piece,
-    gameState,
-    firstTurn
-  ); // down
-  addValidMoves(
-    rank - 1,
-    file,
-    movement - 1,
-    validMoves,
-    piece,
-    gameState,
-    firstTurn
-  ); // left
+  const directions = [
+    [-1, 0], // up
+    [1, 0],  // down
+    [0, -1], // left
+    [0, 1],  // right
+  ];
+
+  for (let [dx, dy] of directions) {
+    for (let i = 1; i <= movement; i++) {
+      const newX = rank + dx * i;
+      const newY = file + dy * i;
+
+      if (newX < 0 || newX > 7 || newY < 0 || newY > 7) break;
+
+      const target = gameState[newX][newY];
+
+      if (target) {
+        if (!isPlayerPiece(target, piece)) {
+          validMoves.push([newX, newY]); // Can capture
+        }
+        break; // Stop after hitting any piece
+      }
+
+      validMoves.push([newX, newY]);
+    }
+  }
 
   setValidMoves(validMoves);
-};
-
-const addValidMoves = (
-  x,
-  y,
-  movement,
-  validMoves,
-  piece,
-  gameState,
-  firstTurn
-) => {
-  if (7 < x || x < 0 || 7 < y || y < 0) return;
-
-  if (gameState[x][y] && isPlayerPiece(gameState[x][y], piece)) return; // Abort if hits own piece
-  if (gameState[x][y]) {
-    validMoves.push([x, y]);
-    return;
-  } // Mark valid and abort if hit opponent piece
-  if (movement === 0) {
-    validMoves.push([x, y]);
-    return;
-  } // Final move terminates
-
-  validMoves.push([x, y]);
-
-  addValidMoves(
-    x,
-    y - 1,
-    movement - 1,
-    validMoves,
-    piece,
-    gameState,
-    firstTurn
-  ); // up
-  addValidMoves(
-    x + 1,
-    y,
-    movement - 1,
-    validMoves,
-    piece,
-    gameState,
-    firstTurn
-  ); // right
-  addValidMoves(
-    x,
-    y + 1,
-    movement - 1,
-    validMoves,
-    piece,
-    gameState,
-    firstTurn
-  ); // down
-  addValidMoves(
-    x - 1,
-    y,
-    movement - 1,
-    validMoves,
-    piece,
-    gameState,
-    firstTurn
-  ); // left
 };
 
 export const isArrayInArray = (arr, item) => {
@@ -126,7 +52,7 @@ const movementSpeed = (piece) => {
   switch (piece) {
     case Pieces.WHITE:
     case Pieces.BLACK:
-      return 8;
+      return 4;
     default:
       return 0;
   }

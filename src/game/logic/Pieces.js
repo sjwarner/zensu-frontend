@@ -1,6 +1,6 @@
 const Pieces = {
   BLACK: "b",
-  WHITE: "w",
+  WHITE: "W",
 };
 
 export default Pieces;

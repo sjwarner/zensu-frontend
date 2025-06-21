@@ -47,13 +47,12 @@ const LocalBoard = ({
     ) {
       setOriginRank(rank);
       setOriginFile(file);
-      // calculateValidMoves(
-      //   rank,
-      //   file,
-      //   gameState,
-      //   setValidMoves,
-      //   playerOneFirstTurn || playerTwoFirstTurn
-      // );
+      calculateValidMoves(
+        rank,
+        file,
+        gameState,
+        setValidMoves
+      );
     }
   };
 
