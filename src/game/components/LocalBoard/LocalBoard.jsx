@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-// import useSound from "use-sound";
+import useSound from "use-sound";
 
 import BoardSquares from "../BoardSquares/BoardSquares";
 import LocalBoardCaption from "../LocalBoardCaption/LocalBoardCaption";
 import BoardSidePane from "../SidePane/BoardSidePane/BoardSidePane";
 
-// import moveSfx from "../../../sounds/move.wav";
+import moveSfx from "../../../sounds/move.wav";
 
 import Pieces from "../../logic/Pieces";
 import Players from "../../logic/Players";
@@ -23,11 +23,11 @@ const LocalBoard = ({
 }) => {
   const [originRank, setOriginRank] = useState(null);
   const [originFile, setOriginFile] = useState(null);
-  // const [playMoveSound] = useSound(moveSfx);
+  const [playMoveSound] = useSound(moveSfx);
   const [validMoves, setValidMoves] = useState([]);
 
   const makeMove = (rank, file) => {
-    // playMoveSound();
+    playMoveSound();
     originRank === null && originFile === null
       ? selectCandidatePiece(rank, file)
       : originRank === rank && originFile === file
