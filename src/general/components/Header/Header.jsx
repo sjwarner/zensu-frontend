@@ -8,7 +8,7 @@ const Header = () => {
         <Cube />
       </div>
       <h1 className="font-bold text-2xl">
-        <a href="/src/pages">Zensu</a>
+        <a href="/src/pages">🌸 Zensu 🌸</a>
       </h1>
       <div className="h-8 w-8 ml-8 mr-8 mt-auto mb-auto">
         <Cube />
