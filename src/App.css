@@ -1,42 +1,97 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.app {
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.board {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.board:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.content {
+  width: 100%;
+  height: 100%;
 }
 
-.card {
-  padding: 2em;
+.board-row {
+  height: 12.5%;
 }
 
-.read-the-docs {
-  color: #888;
+.square {
+  width: 12.5%;
+}
+
+.square-black {
+  background-color: black;
+}
+
+.square-white {
+  background-color: whitesmoke;
+}
+
+.square-selected {
+  background-image: linear-gradient(
+          to right,
+          rgba(255, 0, 0, 0.5),
+          rgba(255, 0, 0, 0.5)
+  );
+}
+
+.square-valid {
+  background-image: linear-gradient(
+          to right,
+          rgba(0, 255, 0, 0.5),
+          rgba(0, 255, 0, 0.5)
+  );
+}
+
+.square-previous {
+  background-image: linear-gradient(
+          to right,
+          rgba(255, 255, 0, 0.5),
+          rgba(255, 255, 0, 0.5)
+  );
+}
+
+.sphere {
+  height: 80%;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  width: 80%;
+  margin: 10%;
+}
+
+.sphere-white {
+  background-color: whitesmoke;
+  border: 2px solid #d4af37;
+}
+
+.sphere-black {
+  background-color: black;
+  border: 2px solid #d4af37;
+}
+
+.tetrahedron {
+  height: 80%;
+  width: 80%;
+  margin: 10%;
+}
+
+.pyramid {
+  height: 80%;
+  width: 80%;
+  margin: 10%;
+}
+
+.cube {
+  height: 80%;
+  width: 80%;
+  margin: 10%;
 }
