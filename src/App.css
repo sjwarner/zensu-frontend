@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 .app {
   text-align: center;
 }
@@ -5,13 +7,13 @@
 .board {
   position: relative;
   width: 100%;
-  max-width: 700px;
+  max-width: 500px;
 }
 
 .board:after {
   content: "";
   display: block;
-  padding-bottom: 100%;
+  padding-bottom: calc( (9 / 6) * 100% ); /* height/width ratio */
 }
 
 .content {
@@ -20,11 +22,11 @@
 }
 
 .board-row {
-  height: 12.5%;
+  height: calc(100% / 9); /* 9 rows */
 }
 
 .square {
-  width: 12.5%;
+  width: calc(100% / 6); /* 6 columns */
 }
 
 .square-black {
