@@ -3,10 +3,7 @@ import Caption from "../../../general/components/Caption/Caption";
 import Button from "../../../general/components/Button/Button";
 
 import Players from "../../logic/Players";
-import {
-  InitialGameStateWhite,
-  // InitialRandomGameStateWhite,
-} from "../../logic/InitialGameState";
+import { InitialGameStateWhite } from "../../logic/InitialGameState";
 import GameModes from "../../logic/GameModes";
 
 const LocalBoardCaption = ({
@@ -24,11 +21,7 @@ const LocalBoardCaption = ({
     setPreviousGameMode(gameMode);
     setWinner(null);
 
-    if (gameMode === GameModes.ORIGINAL) {
-      setGameState(JSON.parse(JSON.stringify(InitialGameStateWhite)));
-    } else {
-      // setGameState(JSON.parse(JSON.stringify(InitialRandomGameStateWhite())));
-    }
+    setGameState(JSON.parse(JSON.stringify(InitialGameStateWhite)));
   };
 
   return (
@@ -45,13 +38,8 @@ const LocalBoardCaption = ({
         <div className="flex flex-row mb-4">
           <Button onClick={() => resetGame(GameModes.ORIGINAL)}>
             {winner && previousGameMode === GameModes.ORIGINAL
-              ? "Play original again?"
-              : "Original Mode"}
-          </Button>
-          <Button onClick={() => resetGame(GameModes.RANDOM)}>
-            {winner && previousGameMode === GameModes.RANDOM
-              ? "Play random again?"
-              : "Fischer Random"}
+              ? "Play again?"
+              : "Play!"}
           </Button>
         </div>
       )}
