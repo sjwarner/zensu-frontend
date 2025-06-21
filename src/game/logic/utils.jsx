@@ -2,38 +2,48 @@ import Pieces from "./Pieces";
 import Cube from "../components/Pieces/Cube";
 import Empty from "../components/Pieces/Empty";
 
-const BOARD_WIDTH = 6;
-const BOARD_HEIGHT = 9;
+const BOARD_ROWS = 9;     // height (Y)
+const BOARD_COLS = 6;     // width (X)
 
 export const calculateValidMoves = (rank, file, gameState, setValidMoves) => {
   const piece = gameState[rank][file];
-  const movement = movementSpeed(piece);
-  let validMoves = [];
 
-  const directions = [
-    [-1, 0], // up
-    [1, 0],  // down
-    [0, -1], // left
-    [0, 1],  // right
+  // Don't calculate anything for empty spaces
+  if (!piece) return;
+
+  const movement = movementSpeed(piece);
+
+  const validMoves = []
+  const directionMap = [
+    { dx: -1, dy: 0, name: "up" },
+    { dx: 1, dy: 0, name: "down" },
+    { dx: 0, dy: -1, name: "left" },
+    { dx: 0, dy: 1, name: "right" },
   ];
 
-  for (let [dx, dy] of directions) {
-    for (let i = 1; i <= movement; i++) {
-      const newX = rank + dx * i;
-      const newY = file + dy * i;
+  for (let { dx, dy, name } of directionMap) {
+    const maxSteps = movement[name];
+    for (let i = 1; i <= maxSteps; i++) {
+      const newRow = rank + dx * i;
+      const newCol = file + dy * i;
 
-      if (newX < 0 || newX > 7 || newY < 0 || newY > 7) break;
+      // If out of bounds, break loop
+      if (newRow < 0 || newRow >= BOARD_ROWS || newCol < 0 || newCol >= BOARD_COLS) break;
 
-      const target = gameState[newX][newY];
+      const target = gameState[newRow][newCol];
 
       if (target) {
-        if (!isPlayerPiece(target, piece)) {
-          validMoves.push([newX, newY]); // Can capture
+        if (isPlayerPiece(target, piece)) {
+          // Can hop over your own pieces
+          continue;
+        } else {
+          // Can take opponent pieces
+          validMoves.push([newRow, newCol]);
+          continue;
         }
-        break; // Stop after hitting any piece
       }
 
-      validMoves.push([newX, newY]);
+      validMoves.push([newRow, newCol]);
     }
   }
 
@@ -48,13 +58,14 @@ export const isArrayInArray = (arr, item) => {
   });
 };
 
-const movementSpeed = (piece) => {
+export const movementSpeed = (piece) => {
   switch (piece) {
     case Pieces.WHITE:
+      return { up: 2, down: 4, left: 1, right: 3 };
     case Pieces.BLACK:
-      return 4;
+      return { up: 4, down: 2, left: 3, right: 1 };
     default:
-      return 0;
+      return { up: 0, down: 0, left: 0, right: 0 };
   }
 };
 

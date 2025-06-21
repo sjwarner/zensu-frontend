@@ -12,14 +12,12 @@ const BoardSquares = ({
   isPlayerTurn,
   makeMove,
 }) => {
-  console.log('gameState');
-  console.log(gameState);
-  return Array(8)
+  return Array(9)
     .fill(1)
     .map((el, x) => {
       return (
         <div id={`rank-${x}`} className="board-row flex flex-row" key={x}>
-          {Array(8)
+          {Array(6)
             .fill(1)
             .map((el, y) => {
               return (
