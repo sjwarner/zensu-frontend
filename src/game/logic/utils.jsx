@@ -3,52 +3,37 @@ import FrontRowPiece from "../components/Pieces/FrontRowPiece.jsx";
 import BackRowPiece from "../components/Pieces/BackRowPiece.jsx";
 import Empty from "../components/Pieces/Empty";
 
-const BOARD_ROWS = 9;     // height (Y)
-const BOARD_COLS = 6;     // width (X)
+const BOARD_ROWS = 9;
+const BOARD_COLS = 6;
 
 export const calculateValidMoves = (rank, file, gameState, setValidMoves) => {
   const piece = gameState[rank][file];
-
-  // Don't calculate anything for empty spaces
   if (!piece) return;
+
+  const moves = [];
+  const move = (dx, dy, steps) => {
+    const destRow = rank + dx * steps;
+    const destCol = file + dy * steps;
+
+    // Check if destination is on board
+    if (destRow < 0 || destRow >= BOARD_ROWS || destCol < 0 || destCol >= BOARD_COLS) return;
+
+    const destCell = gameState[destRow][destCol];
+
+    // You can move if the destination is empty or occupied by an opponent
+    if (!destCell || !isPlayerPiece(destCell, piece)) {
+      moves.push([destRow, destCol]);
+    }
+  };
 
   const movement = movementSpeed(piece);
 
-  const validMoves = []
-  const directionMap = [
-    { dx: -1, dy: 0, name: "up" },
-    { dx: 1, dy: 0, name: "down" },
-    { dx: 0, dy: -1, name: "left" },
-    { dx: 0, dy: 1, name: "right" },
-  ];
+  move(-1, 0, movement.up);
+  move(1, 0, movement.down);
+  move(0, -1, movement.left);
+  move(0, 1, movement.right);
 
-  for (let { dx, dy, name } of directionMap) {
-    const maxSteps = movement[name];
-    for (let i = 1; i <= maxSteps; i++) {
-      const newRow = rank + dx * i;
-      const newCol = file + dy * i;
-
-      // If out of bounds, break loop
-      if (newRow < 0 || newRow >= BOARD_ROWS || newCol < 0 || newCol >= BOARD_COLS) break;
-
-      const target = gameState[newRow][newCol];
-
-      if (target) {
-        if (isPlayerPiece(target, piece)) {
-          // Can hop over your own pieces
-          continue;
-        } else {
-          // Can take opponent pieces
-          validMoves.push([newRow, newCol]);
-          continue;
-        }
-      }
-
-      validMoves.push([newRow, newCol]);
-    }
-  }
-
-  setValidMoves(validMoves);
+  setValidMoves(moves);
 };
 
 export const isArrayInArray = (arr, item) => {
