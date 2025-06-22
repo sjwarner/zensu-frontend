@@ -29,12 +29,14 @@
   width: calc(100% / 6); /* 6 columns */
 }
 
-.square-black {
-  background-color: black;
+.square-middle {
+  background-color: #fbefdf;
+  border: solid #203542 1px;
 }
 
-.square-white {
-  background-color: whitesmoke;
+.square-home-row {
+  background-color: #203542;
+  border: solid #fbefdf 1px;
 }
 
 .square-selected {

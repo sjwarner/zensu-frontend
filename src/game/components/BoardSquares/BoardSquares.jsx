@@ -22,7 +22,7 @@ const BoardSquares = ({
             .map((el, y) => {
               return (
                 <BoardSquare
-                  colour={(x + y) % 2 === 0 ? "black" : "white"}
+                  colour={x === 0 || x === 8 ? "middle" : "home-row"}
                   piece={gameState[x][y]}
                   selected={x === originRank && y === originFile}
                   lastMove={lastMove ? lastMove[x][y] : null}
