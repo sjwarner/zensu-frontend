@@ -3,7 +3,7 @@ import FeatherIcon from "feather-icons-react";
 
 const Footer = () => {
   return (
-    <footer className="py-5 bg-black text-center text-white flex flex-row justify-between">
+    <footer className="py-5 bg-[#fbefdf] text-center text-[#ce3731] flex flex-row justify-between">
       <div className="ml-8 mr-8">
         <p>
           Learn the{" "}
