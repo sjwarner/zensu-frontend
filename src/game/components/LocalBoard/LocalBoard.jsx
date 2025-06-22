@@ -62,27 +62,43 @@ const LocalBoard = ({
     setValidMoves([]);
   };
 
-  const clearPiecesBetween = (originRank, originFile, destinationRank, destinationFile, gameState) => {
-    const stepRow = Math.sign(destinationRank - originRank);
-    const stepCol = Math.sign(destinationFile - originFile);
+  const clearPiecesBetween = (
+      originRank,
+      originFile,
+      destinationRank,
+      destinationFile,
+      gameState,
+      currentPlayer
+  ) => {
+    const rowStep = Math.sign(destinationRank - originRank);
+    const colStep = Math.sign(destinationFile - originFile);
     const distance = Math.max(
         Math.abs(destinationRank - originRank),
         Math.abs(destinationFile - originFile)
     );
 
-    const positionsToClear = new Set();
-    for (let i = 1; i < distance; i++) {
-      positionsToClear.add(`${originRank + stepRow * i},${originFile + stepCol * i}`);
-    }
+    return gameState.map((row, rowIndex) =>
+        row.map((cell, colIndex) => {
+          for (let step = 1; step < distance; step++) {
+            const currentRow = originRank + rowStep * step;
+            const currentCol = originFile + colStep * step;
 
-    return gameState.map((row, r) =>
-        row.map((cell, c) => (positionsToClear.has(`${r},${c}`) ? "" : cell))
+            const isOpponent =
+                (currentPlayer === Players.RED && cell === cell.toLowerCase()) ||
+                (currentPlayer === Players.BLUE && cell === cell.toUpperCase());
+
+            if (rowIndex === currentRow && colIndex === currentCol && isOpponent) {
+              return "";
+            }
+          }
+          return cell;
+        })
     );
   };
 
   const movePiece = (destinationRank, destinationFile) => {
     if (isArrayInArray(validMoves, [destinationRank, destinationFile])) {
-      let newGameState = clearPiecesBetween(originRank, originFile, destinationRank, destinationFile, gameState);
+      let newGameState = clearPiecesBetween(originRank, originFile, destinationRank, destinationFile, gameState, turn);
 
       newGameState = newGameState.map((row, r) =>
           row.map((cell, c) => {
@@ -118,7 +134,6 @@ const LocalBoard = ({
       setInProgress(false);
     }
   }
-
 
   return (
     <>
